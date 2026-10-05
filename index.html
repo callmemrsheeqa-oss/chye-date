@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chai Date ☕❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--pink:#ff5f8f;--deep:#c92f63;--cream:#fff8f1;--text:#4b2635}
+body{min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(135deg,#fff0f5,#fff8ed);color:var(--text);overflow-x:hidden}
+#app{min-height:100vh;display:grid;place-items:center;padding:24px}
+.card{width:min(620px,100%);min-height:540px;background:rgba(255,255,255,.9);border:1px solid rgba(255,95,143,.15);border-radius:28px;padding:38px 28px;box-shadow:0 20px 60px rgba(126,45,75,.14);position:relative;overflow:hidden}
+.step{display:none;min-height:460px;flex-direction:column;justify-content:center;align-items:center;text-align:center;animation:stepIn .42s ease both}
+.step.active{display:flex}
+@keyframes stepIn{from{opacity:0;transform:translateX(28px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
+.emoji{font-size:64px;margin-bottom:18px}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.15;margin-bottom:14px;color:#8e214b}
+h2{font-size:30px;margin-bottom:12px;color:#8e214b}
+p{font-size:17px;line-height:1.6;color:#704957;margin-bottom:26px}
+.actions{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
+button,.field{font:inherit}
+button{border:0;border-radius:999px;padding:13px 24px;font-weight:700;cursor:pointer;transition:transform .18s,box-shadow .18s,opacity .18s}
+button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 20px rgba(126,45,75,.16)}
+.primary{background:var(--pink);color:white}
+.secondary{background:#fff0f4;color:#a52b59;border:1px solid #ffc5d5}
+button:disabled{opacity:.45;cursor:not-allowed}
+#noBtn{position:relative}
+.field-wrap{width:min(430px,100%);margin:4px auto 20px;text-align:left}
+label{display:block;font-weight:700;margin:0 0 8px 4px}
+input{width:100%;padding:15px 16px;border:2px solid #f0c7d4;border-radius:16px;outline:none;background:white;color:var(--text);font-size:17px}
+input:focus{border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,95,143,.1)}
+input.invalid{border-color:#dc496d}
+.error{min-height:25px;color:#c72f5c;font-size:14px;font-weight:600;margin:8px 2px 0}
+.nav{display:flex;gap:12px;margin-top:8px}
+.back{background:#f7eef2;color:#744253}
+.progress{position:absolute;top:0;left:0;right:0;height:5px;background:#f7e3ea}
+.progress i{display:block;height:100%;width:20%;background:var(--pink);transition:width .35s ease}
+.confirm-box{background:#fff7fa;border:1px solid #ffd4e1;border-radius:20px;padding:22px;margin:12px 0 22px;width:min(500px,100%)}
+.confirm-box strong{color:#a12656}
+#celebration{display:none;position:fixed;inset:0;z-index:20;background:rgba(255,248,245,.95);place-items:center;text-align:center;padding:25px}
+#celebration.show{display:grid}
+.celebrate-content{animation:pop .55s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.heart{position:fixed;top:-40px;font-size:28px;animation:fall 3.2s linear forwards;pointer-events:none;z-index:30}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+@media(max-width:520px){.card{padding:30px 18px}.actions{gap:10px}.actions button{width:145px}.nav button{width:130px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <main class="card">
+    <div class="progress"><i id="progress"></i></div>
+
+    <section class="step active" data-step="1">
+      <div class="emoji">☕❤️</div>
+      <h1>Kya tum mere saath chai peenay chalo gi?</h1>
+      <p>Ek simple si chai... aur thori si achi company. 🥹</p>
+      <div class="actions">
+        <button class="primary" id="yesBtn">Yes ❤️</button>
+        <button class="secondary" id="noBtn">No 😌</button>
+      </div>
+    </section>
+
+    <section class="step" data-step="2">
+      <div class="emoji">📅☕</div>
+      <h2>Chalo date choose karo</h2>
+      <p>Hamari chai date kis din honi chahiye?</p>
+      <div class="field-wrap">
+        <label for="dateInput">Date</label>
+        <input id="dateInput" type="date">
+        <div class="error" id="dateError"></div>
+      </div>
+      <div class="nav">
+        <button class="back" id="dateBack">← Back</button>
+        <button class="primary" id="dateContinue" disabled>Continue →</button>
+      </div>
+    </section>
+
+    <section class="step" data-step="3">
+      <div class="emoji">⏰☕</div>
+      <h2>Ab time bhi select karo</h2>
+      <p>Chai ka perfect time kya hai?</p>
+      <div class="field-wrap">
+        <label for="timeInput">Time</label>
+        <input id="timeInput" type="time">
+        <div class="error" id="timeError"></div>
+      </div>
+      <div class="nav">
+        <button class="back" id="timeBack">← Back</button>
+        <button class="primary" id="timeContinue" disabled>Continue →</button>
+      </div>
+    </section>
+
+    <section class="step" data-step="4">
+      <div class="emoji">📍☕</div>
+      <h2>Chai kahan peeni hai?</h2>
+      <p>Location batao, phir plan officially ready hai. ❤️</p>
+      <div class="field-wrap">
+        <label for="locationInput">Location</label>
+        <input id="locationInput" type="text" maxlength="120" placeholder="e.g. ABC Cafe">
+        <div class="error" id="locationError"></div>
+      </div>
+      <div class="nav">
+        <button class="back" id="locationBack">← Back</button>
+        <button class="primary" id="locationContinue" disabled>Continue →</button>
+      </div>
+    </section>
+
+    <section class="step" data-step="5">
+      <div class="emoji">🎉❤️</div>
+      <h2>Chai Date Confirmation</h2>
+      <div class="confirm-box" id="confirmationText"></div>
+      <div class="nav">
+        <button class="back" id="confirmBack">← Edit</button>
+        <button class="primary" id="confirmBtn">Yes, it's a date! ❤️☕</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="celebration">
+  <div class="celebrate-content">
+    <div class="emoji">☕🎉❤️</div>
+    <h1>Perfect! ❤️☕</h1>
+    <p>It's officially a chai date!</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const STORAGE_KEY = "chaiDateState";
+  const state = { response:null, selectedDate:"", selectedTime:"", location:"" };
+
+  const steps = [...document.querySelectorAll(".step")];
+  const progress = document.getElementById("progress");
+  const dateInput = document.getElementById("dateInput");
+  const timeInput = document.getElementById("timeInput");
+  const locationInput = document.getElementById("locationInput");
+  const dateContinue = document.getElementById("dateContinue");
+  const timeContinue = document.getElementById("timeContinue");
+  const locationContinue = document.getElementById("locationContinue");
+  const dateError = document.getElementById("dateError");
+  const timeError = document.getElementById("timeError");
+  const locationError = document.getElementById("locationError");
+
+  function save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        response: state.response,
+        selectedDate: state.selectedDate,
+        selectedTime: state.selectedTime,
+        location: state.location
+      }));
+    } catch (_) {}
+  }
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      if (!saved || typeof saved !== "object") return;
+      state.response = saved.response === "Yes" ? "Yes" : null;
+      state.selectedDate = typeof saved.selectedDate === "string" ? saved.selectedDate : "";
+      state.selectedTime = typeof saved.selectedTime === "string" ? saved.selectedTime : "";
+      state.location = typeof saved.location === "string" ? saved.location : "";
+    } catch (_) {}
+  }
+
+  function todayISO() {
+    const d = new Date();
+    const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0,10);
+  }
+
+  function validDate(value) {
+    if (!value) return false;
+    const d = new Date(value + "T00:00:00");
+    return !Number.isNaN(d.getTime()) && value >= todayISO();
+  }
+
+  function validTime(value) {
+    return /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+  }
+
+  function validLocation(value) {
+    return value.trim().length >= 2;
+  }
+
+  function refreshValidation() {
+    const dv = validDate(dateInput.value);
+    const tv = validTime(timeInput.value);
+    const lv = validLocation(locationInput.value);
+    dateContinue.disabled = !dv;
+    timeContinue.disabled = !tv;
+    locationContinue.disabled = !lv;
+    dateError.textContent = dateInput.value && !dv ? "Please choose today or a future date ☕❤️" : "";
+    timeError.textContent = timeInput.value && !tv ? "Please choose a valid time." : "";
+    locationError.textContent = locationInput.value && !lv ? "Please enter at least 2 meaningful characters." : "";
+  }
+
+  function goTo(stepNumber) {
+    const target = Math.min(5, Math.max(1, stepNumber));
+    steps.forEach(s => s.classList.toggle("active", Number(s.dataset.step) === target));
+    progress.style.width = (target * 20) + "%";
+    window.scrollTo({top:0, behavior:"smooth"});
+    if (target === 5) renderConfirmation();
+  }
+
+  function firstIncompleteStep() {
+    if (state.response !== "Yes") return 1;
+    if (!validDate(state.selectedDate)) return 2;
+    if (!validTime(state.selectedTime)) return 3;
+    if (!validLocation(state.location)) return 4;
+    return 5;
+  }
+
+  function formatDate(value) {
+    const d = new Date(value + "T00:00:00");
+    return new Intl.DateTimeFormat("en-GB", {day:"numeric", month:"long", year:"numeric"}).format(d);
+  }
+
+  function formatTime(value) {
+    const [h,m] = value.split(":").map(Number);
+    const suffix = h >= 12 ? "PM" : "AM";
+    const hour = h % 12 || 12;
+    return hour + ":" + String(m).padStart(2,"0") + " " + suffix;
+  }
+
+  function renderConfirmation() {
+    document.getElementById("confirmationText").innerHTML =
+      "Congratulations! 🎉❤️ You have set the chai date for " +
+      "<strong>" + escapeHtml(formatDate(state.selectedDate)) + "</strong> at " +
+      "<strong>" + escapeHtml(formatTime(state.selectedTime)) + "</strong> at " +
+      "<strong>" + escapeHtml(state.location.trim()) + "</strong>. Shall we meet at this time? ☕";
+  }
+
+  function escapeHtml(value) {
+    return value.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function restoreInputs() {
+    dateInput.min = todayISO();
+    dateInput.value = validDate(state.selectedDate) ? state.selectedDate : "";
+    timeInput.value = validTime(state.selectedTime) ? state.selectedTime : "";
+    locationInput.value = state.location;
+    refreshValidation();
+  }
+
+  document.getElementById("yesBtn").addEventListener("click", () => {
+    state.response = "Yes";
+    save();
+    goTo(2);
+  });
+
+  const noBtn = document.getElementById("noBtn");
+  function moveNo() {
+    const margin = 12;
+    const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - margin * 2);
+    const maxY = Math.max(0, window.innerHeight - noBtn.offsetHeight - margin * 2);
+    noBtn.style.position = "fixed";
+    noBtn.style.left = (margin + Math.random() * maxX) + "px";
+    noBtn.style.top = (margin + Math.random() * maxY) + "px";
+  }
+  ["pointerenter","pointerdown","touchstart","click"].forEach(eventName => {
+    noBtn.addEventListener(eventName, event => {
+      event.preventDefault();
+      event.stopPropagation();
+      moveNo();
+    }, {passive:false});
+  });
+
+  dateInput.addEventListener("input", refreshValidation);
+  timeInput.addEventListener("input", refreshValidation);
+  locationInput.addEventListener("input", refreshValidation);
+
+  dateContinue.addEventListener("click", () => {
+    if (!validDate(dateInput.value)) return refreshValidation();
+    state.selectedDate = dateInput.value;
+    save();
+    goTo(3);
+  });
+
+  timeContinue.addEventListener("click", () => {
+    if (!validTime(timeInput.value)) return refreshValidation();
+    state.selectedTime = timeInput.value;
+    save();
+    goTo(4);
+  });
+
+  locationContinue.addEventListener("click", () => {
+    const value = locationInput.value.trim();
+    if (!validLocation(value)) return refreshValidation();
+    state.location = value;
+    locationInput.value = value;
+    save();
+    goTo(5);
+  });
+
+  document.getElementById("dateBack").addEventListener("click", () => goTo(1));
+  document.getElementById("timeBack").addEventListener("click", () => goTo(2));
+  document.getElementById("locationBack").addEventListener("click", () => goTo(3));
+  document.getElementById("confirmBack").addEventListener("click", () => {
+    if (!validDate(state.selectedDate)) return goTo(2);
+    if (!validTime(state.selectedTime)) return goTo(3);
+    if (!validLocation(state.location)) return goTo(4);
+    goTo(4);
+  });
+
+  document.getElementById("confirmBtn").addEventListener("click", function() {
+    if (state.response !== "Yes") return goTo(1);
+    if (!validDate(state.selectedDate)) return goTo(2);
+    if (!validTime(state.selectedTime)) return goTo(3);
+    if (!validLocation(state.location)) return goTo(4);
+    this.disabled = true;
+    document.getElementById("celebration").classList.add("show");
+    for (let i=0;i<28;i++) {
+      const heart = document.createElement("span");
+      heart.className = "heart";
+      heart.textContent = Math.random() > .35 ? "❤️" : "☕";
+      heart.style.left = Math.random()*100 + "vw";
+      heart.style.animationDelay = Math.random()*1.4 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setTimeout(() => { this.disabled = false; }, 1800);
+  });
+
+  load();
+  restoreInputs();
+  goTo(firstIncompleteStep());
+})();
+</script>
+</body>
+</html>
