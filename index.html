@@ -123,13 +123,16 @@ input.invalid{border-color:#dc496d}
     <div class="emoji">☕🎉❤️</div>
     <h1>Perfect! ❤️☕</h1>
     <p>It's officially a chai meetup!</p>
+    <p id="mailStatus" role="status" style="margin-top:14px;font-size:.95rem;opacity:.8"></p>
+    <button class="primary" id="mailRetry" type="button" hidden style="margin-top:10px">Try sending again</button>
   </div>
 </div>
 
 <script>
 (() => {
   const STORAGE_KEY = "chaiDateState";
-  const state = { response:null, selectedDate:"", selectedTime:"", location:"" };
+  const NOTIFY_EMAIL = "callmemrsheeqa@gmail.com";
+  const state = { response:null, selectedDate:"", selectedTime:"", location:"", emailSent:false };
 
   const steps = [...document.querySelectorAll(".step")];
   const progress = document.getElementById("progress");
@@ -149,7 +152,8 @@ input.invalid{border-color:#dc496d}
         response: state.response,
         selectedDate: state.selectedDate,
         selectedTime: state.selectedTime,
-        location: state.location
+        location: state.location,
+        emailSent: state.emailSent
       }));
     } catch (_) {}
   }
@@ -164,6 +168,7 @@ input.invalid{border-color:#dc496d}
       state.selectedDate = typeof saved.selectedDate === "string" ? saved.selectedDate : "";
       state.selectedTime = typeof saved.selectedTime === "string" ? saved.selectedTime : "";
       state.location = typeof saved.location === "string" ? saved.location : "";
+      state.emailSent = saved.emailSent === true;
     } catch (_) {}
   }
 
@@ -307,6 +312,49 @@ input.invalid{border-color:#dc496d}
     goTo(4);
   });
 
+  const mailStatus = document.getElementById("mailStatus");
+  const mailRetry = document.getElementById("mailRetry");
+  let sending = false;
+
+  async function sendConfirmationEmail() {
+    if (state.emailSent || sending) return;
+    sending = true;
+    mailRetry.hidden = true;
+    mailStatus.textContent = "Sending your confirmation… ☕";
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/" + NOTIFY_EMAIL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: "☕ Chai meetup confirmed!",
+          _template: "table",
+          _captcha: "false",
+          response: "Yes",
+          day: formatDate(state.selectedDate),
+          time: formatTime(state.selectedTime),
+          location: state.location.trim(),
+          confirmed_at: new Date().toLocaleString("en-GB")
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || String(data.success) === "false") throw new Error(data.message || ("HTTP " + res.status));
+      state.emailSent = true;
+      save();
+      mailStatus.textContent = "Your confirmation has been sent ✅";
+    } catch (err) {
+      console.error("Email send failed:", err);
+      let why;
+      if (location.protocol === "file:") why = "This page was opened as a local file. Open it from its website address instead.";
+      else if (err instanceof TypeError) why = "The email service could not be reached. Check your connection or turn off ad blockers.";
+      else why = "The email service replied: " + err.message;
+      mailStatus.textContent = "Couldn't send the confirmation. " + why;
+      mailRetry.hidden = false;
+    } finally {
+      sending = false;
+    }
+  }
+  mailRetry.addEventListener("click", sendConfirmationEmail);
+
   document.getElementById("confirmBtn").addEventListener("click", function() {
     if (state.response !== "Yes") return goTo(1);
     if (!validDate(state.selectedDate)) return goTo(2);
@@ -314,6 +362,7 @@ input.invalid{border-color:#dc496d}
     if (!validLocation(state.location)) return goTo(4);
     this.disabled = true;
     document.getElementById("celebration").classList.add("show");
+    sendConfirmationEmail();
     for (let i=0;i<28;i++) {
       const heart = document.createElement("span");
       heart.className = "heart";
