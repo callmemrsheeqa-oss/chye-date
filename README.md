@@ -1,28 +1,28 @@
-# Chai Date ☕❤️
+# Chai Meetup ☕❤️
 
-A cute interactive chai-date invitation website with a playful **Yes / No** interaction and a complete 5-step date-planning flow.
+A cute interactive chai meetup website with a playful **Yes / No** interaction and a complete 5-step planning flow.
 
-## Live Project Flow
+## Project Flow
 
 The website guides the user through:
 
-1. **Chai Invitation** — “Kya tum mere saath chai peenay chalo gi?”
-2. **Date Selection** — choose today or a future date
+1. **Chai Invitation** — “Would you like to have chai with me?”
+2. **Day Selection** — choose today or a future day
 3. **Time Selection** — choose a valid time
-4. **Location** — enter the chai-date location
-5. **Final Confirmation** — review and confirm the complete date
+4. **Location** — choose where to meet
+5. **Final Confirmation** — review and confirm the chai meetup
 
 ## Features
 
 - ❤️ Interactive **Yes / No** invitation
 - 😌 The **No** button moves to a random position when approached or clicked
 - ☕ Smooth multi-step navigation without page reloads
-- 📅 Date validation with past dates rejected
+- 📅 Day validation with past days rejected
 - ⏰ Time validation
 - 📍 Location validation and whitespace trimming
 - ← Back navigation with previous selections preserved
 - 💾 Session state saved with browser `localStorage`
-- 🎉 Dynamic confirmation using the selected date, time, and location
+- 🎉 Dynamic confirmation using the selected day, time, and location
 - ❤️☕ Final celebration animation with hearts and chai emojis
 - 📱 Responsive design for desktop and mobile screens
 - 🛡️ Graceful handling of missing or invalid saved state
@@ -55,17 +55,17 @@ Download or clone the repository and open `index.html` in a modern web browser.
 ### Step 1 — Invitation
 
 - The **Yes ❤️** button records the response as `Yes`.
-- The user is immediately taken to date selection.
+- The user is immediately taken to day selection.
 - The **No 😌** button is not treated as a valid response.
 - When the user tries to interact with **No**, it moves to another position inside the visible viewport.
 
-### Step 2 — Date
+### Step 2 — Day
 
-A date is required before continuing.
+A day is required before continuing.
 
-- Today and future dates are accepted.
-- Past dates are rejected.
-- The Continue button remains disabled until a valid date is selected.
+- Today and future days are accepted.
+- Past days are rejected.
+- The Continue button remains disabled until a valid day is selected.
 
 ### Step 3 — Time
 
@@ -86,11 +86,11 @@ The final screen is generated from the actual saved values.
 
 Example:
 
-> Congratulations! 🎉❤️ You have set the chai date for 15 October 2026 at 6:00 PM at ABC Cafe. Shall we meet at this time? ☕
+> Great! 🎉❤️ You have planned a chai meetup for 15 October 2026 at 6:00 PM at ABC Cafe. Shall we meet there at this time? ☕
 
 After confirmation:
 
-> Perfect! ❤️☕ It's officially a chai date!
+> Perfect! ❤️☕ It's officially a chai meetup!
 
 ## State Management
 
