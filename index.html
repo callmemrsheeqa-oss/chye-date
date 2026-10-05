@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chai Date ☕❤️</title>
+<title>Chai Meetup ☕❤️</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--pink:#ff5f8f;--deep:#c92f63;--cream:#fff8f1;--text:#4b2635}
@@ -53,8 +53,8 @@ input.invalid{border-color:#dc496d}
 
     <section class="step active" data-step="1">
       <div class="emoji">☕❤️</div>
-      <h1>Kya tum mere saath chai peenay chalo gi?</h1>
-      <p>Ek simple si chai... aur thori si achi company. 🥹</p>
+      <h1>Would you like to have chai with me?</h1>
+      <p>Just a simple cup of chai and good company. 🥹</p>
       <div class="actions">
         <button class="primary" id="yesBtn">Yes ❤️</button>
         <button class="secondary" id="noBtn">No 😌</button>
@@ -63,8 +63,8 @@ input.invalid{border-color:#dc496d}
 
     <section class="step" data-step="2">
       <div class="emoji">📅☕</div>
-      <h2>Chalo date choose karo</h2>
-      <p>Hamari chai date kis din honi chahiye?</p>
+      <h2>Choose a day</h2>
+      <p>Which day should we meet for chai?</p>
       <div class="field-wrap">
         <label for="dateInput">Date</label>
         <input id="dateInput" type="date">
@@ -78,8 +78,8 @@ input.invalid{border-color:#dc496d}
 
     <section class="step" data-step="3">
       <div class="emoji">⏰☕</div>
-      <h2>Ab time bhi select karo</h2>
-      <p>Chai ka perfect time kya hai?</p>
+      <h2>Choose a time</h2>
+      <p>What would be the perfect time for chai?</p>
       <div class="field-wrap">
         <label for="timeInput">Time</label>
         <input id="timeInput" type="time">
@@ -93,8 +93,8 @@ input.invalid{border-color:#dc496d}
 
     <section class="step" data-step="4">
       <div class="emoji">📍☕</div>
-      <h2>Chai kahan peeni hai?</h2>
-      <p>Location batao, phir plan officially ready hai. ❤️</p>
+      <h2>Choose a location</h2>
+      <p>Tell me where we should meet, and the plan will be ready. ❤️</p>
       <div class="field-wrap">
         <label for="locationInput">Location</label>
         <input id="locationInput" type="text" maxlength="120" placeholder="e.g. ABC Cafe">
@@ -108,11 +108,11 @@ input.invalid{border-color:#dc496d}
 
     <section class="step" data-step="5">
       <div class="emoji">🎉❤️</div>
-      <h2>Chai Date Confirmation</h2>
+      <h2>Chai Meetup Confirmation</h2>
       <div class="confirm-box" id="confirmationText"></div>
       <div class="nav">
         <button class="back" id="confirmBack">← Edit</button>
-        <button class="primary" id="confirmBtn">Yes, it's a date! ❤️☕</button>
+        <button class="primary" id="confirmBtn">Yes, let's meet! ❤️☕</button>
       </div>
     </section>
   </main>
@@ -122,7 +122,7 @@ input.invalid{border-color:#dc496d}
   <div class="celebrate-content">
     <div class="emoji">☕🎉❤️</div>
     <h1>Perfect! ❤️☕</h1>
-    <p>It's officially a chai date!</p>
+    <p>It's officially a chai meetup!</p>
   </div>
 </div>
 
@@ -194,7 +194,7 @@ input.invalid{border-color:#dc496d}
     dateContinue.disabled = !dv;
     timeContinue.disabled = !tv;
     locationContinue.disabled = !lv;
-    dateError.textContent = dateInput.value && !dv ? "Please choose today or a future date ☕❤️" : "";
+    dateError.textContent = dateInput.value && !dv ? "Please choose today or a future day ☕❤️" : "";
     timeError.textContent = timeInput.value && !tv ? "Please choose a valid time." : "";
     locationError.textContent = locationInput.value && !lv ? "Please enter at least 2 meaningful characters." : "";
   }
@@ -229,10 +229,10 @@ input.invalid{border-color:#dc496d}
 
   function renderConfirmation() {
     document.getElementById("confirmationText").innerHTML =
-      "Congratulations! 🎉❤️ You have set the chai date for " +
+      "Great! 🎉❤️ You have planned a chai meetup for " +
       "<strong>" + escapeHtml(formatDate(state.selectedDate)) + "</strong> at " +
       "<strong>" + escapeHtml(formatTime(state.selectedTime)) + "</strong> at " +
-      "<strong>" + escapeHtml(state.location.trim()) + "</strong>. Shall we meet at this time? ☕";
+      "<strong>" + escapeHtml(state.location.trim()) + "</strong>. Shall we meet there at this time? ☕";
   }
 
   function escapeHtml(value) {
