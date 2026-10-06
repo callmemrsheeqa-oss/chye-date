@@ -21,7 +21,8 @@ The website guides the user through:
 - ⏰ Time validation
 - 📍 Location validation and whitespace trimming
 - ← Back navigation with previous selections preserved
-- 💾 Session state saved with browser `localStorage`
+- 🔄 Always opens on the first page, even after a refresh
+- 📧 Email notification to the host when the meetup is confirmed
 - 🎉 Dynamic confirmation using the selected day, time, and location
 - ❤️☕ Final celebration animation with hearts and chai emojis
 - 📱 Responsive design for desktop and mobile screens
@@ -94,27 +95,23 @@ After confirmation:
 
 ## State Management
 
-The website stores only these values in browser `localStorage`:
-
-```text
-response
-selectedDate
-selectedTime
-location
-```
-
-If saved data is missing or invalid, the website automatically returns the user to the first incomplete step instead of showing a broken confirmation page.
+Progress is kept in memory only while the page is open. Every time the site is opened or refreshed it starts again from the first page.
 
 ## Technologies
 
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- Browser Local Storage
 - No external framework or backend required
 
 ## Notes
 
-This is a front-end-only project. No personal information is sent to a server or external API.
+This is a front-end-only project with one exception: when the final confirmation button is pressed, the chosen day, time and location are sent once through the FormSubmit.co email service to the host's inbox, so the host knows the chai meetup was confirmed. Nothing else is collected.
+
+### Email notification setup
+
+1. Host the site on GitHub Pages (or any web server) and open it once.
+2. Press the final confirmation button yourself. FormSubmit sends an activation email to the address set in `NOTIFY_EMAIL` in `index.html`.
+3. Click the activation link in that email. After that, every confirmation arrives in that inbox. Check spam if it doesn't appear.
 
 Made with ☕❤️
