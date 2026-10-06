@@ -1,383 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chai Meetup ☕❤️</title>
+<meta charset="utf-8">
+<title>Chai Invitation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@500;700&display=swap">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--pink:#ff5f8f;--deep:#c92f63;--cream:#fff8f1;--text:#4b2635}
-body{min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(135deg,#fff0f5,#fff8ed);color:var(--text);overflow-x:hidden}
-#app{min-height:100vh;display:grid;place-items:center;padding:24px}
-.card{width:min(620px,100%);min-height:540px;background:rgba(255,255,255,.9);border:1px solid rgba(255,95,143,.15);border-radius:28px;padding:38px 28px;box-shadow:0 20px 60px rgba(126,45,75,.14);position:relative;overflow:hidden}
-.step{display:none;min-height:460px;flex-direction:column;justify-content:center;align-items:center;text-align:center;animation:stepIn .42s ease both}
-.step.active{display:flex}
-@keyframes stepIn{from{opacity:0;transform:translateX(28px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
-.emoji{font-size:64px;margin-bottom:18px}
-h1{font-size:clamp(28px,6vw,44px);line-height:1.15;margin-bottom:14px;color:#8e214b}
-h2{font-size:30px;margin-bottom:12px;color:#8e214b}
-p{font-size:17px;line-height:1.6;color:#704957;margin-bottom:26px}
-.actions{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
-button,.field{font:inherit}
-button{border:0;border-radius:999px;padding:13px 24px;font-weight:700;cursor:pointer;transition:transform .18s,box-shadow .18s,opacity .18s}
-button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 20px rgba(126,45,75,.16)}
-.primary{background:var(--pink);color:white}
-.secondary{background:#fff0f4;color:#a52b59;border:1px solid #ffc5d5}
-button:disabled{opacity:.45;cursor:not-allowed}
-#noBtn{position:relative}
-.field-wrap{width:min(430px,100%);margin:4px auto 20px;text-align:left}
-label{display:block;font-weight:700;margin:0 0 8px 4px}
-input{width:100%;padding:15px 16px;border:2px solid #f0c7d4;border-radius:16px;outline:none;background:white;color:var(--text);font-size:17px}
-input:focus{border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,95,143,.1)}
-input.invalid{border-color:#dc496d}
-.error{min-height:25px;color:#c72f5c;font-size:14px;font-weight:600;margin:8px 2px 0}
-.nav{display:flex;gap:12px;margin-top:8px}
-.back{background:#f7eef2;color:#744253}
-.progress{position:absolute;top:0;left:0;right:0;height:5px;background:#f7e3ea}
-.progress i{display:block;height:100%;width:20%;background:var(--pink);transition:width .35s ease}
-.confirm-box{background:#fff7fa;border:1px solid #ffd4e1;border-radius:20px;padding:22px;margin:12px 0 22px;width:min(500px,100%)}
-.confirm-box strong{color:#a12656}
-#celebration{display:none;position:fixed;inset:0;z-index:20;background:rgba(255,248,245,.95);place-items:center;text-align:center;padding:25px}
-#celebration.show{display:grid}
-.celebrate-content{animation:pop .55s cubic-bezier(.2,.9,.3,1.2)}
-@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
-.heart{position:fixed;top:-40px;font-size:28px;animation:fall 3.2s linear forwards;pointer-events:none;z-index:30}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
-@media(max-width:520px){.card{padding:30px 18px}.actions{gap:10px}.actions button{width:145px}.nav button{width:130px}}
+:root{--bg:#2b0f1d;--card:#3d1829;--ink:#fbe9d0;--muted:#d9b8a0;--rose:#ff8fa3;--gold:#f2b134;--err:#ffb4b4;--line:#6b3248;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#fff1e4;--card:#fffaf4;--ink:#3a1626;--muted:#7a5560;--rose:#d63a62;--gold:#b87400;--err:#b3261e;--line:#e8cdb8}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fff1e4;--card:#fffaf4;--ink:#3a1626;--muted:#7a5560;--rose:#d63a62;--gold:#b87400;--err:#b3261e;--line:#e8cdb8}}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:17px;display:grid;place-items:center;min-height:100vh;padding:16px;overflow-x:hidden}
+main{width:100%;max-width:440px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:32px 24px;text-align:center;position:relative}
+h1{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:clamp(1.7rem,7vw,2.2rem);line-height:1.15;margin:12px 0 8px}
+p{margin:0 0 20px;color:var(--muted);line-height:1.5}
+.cup{font-size:3.4rem;display:block}
+.step{display:none}
+.step.active{display:block;animation:in .45s ease both}
+.step.active.back{animation-name:inb}
+@keyframes in{from{opacity:0;transform:translateX(28px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes inb{from{opacity:0;transform:translateX(-28px) scale(.97)}to{opacity:1;transform:none}}
+button,input,select{font:inherit;color:inherit}
+.btn{border:0;border-radius:999px;padding:13px 28px;font-weight:700;cursor:pointer;background:var(--rose);color:#2b0f1d;transition:transform .15s,opacity .15s}
+.btn:hover:not(:disabled){transform:scale(1.04)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.btn.big{padding:15px 36px;font-size:1.1rem}
+.row{display:flex;gap:12px;justify-content:center;align-items:center;min-height:56px;flex-wrap:wrap}
+#noBtn{background:var(--line);color:var(--ink);z-index:50;touch-action:none}
+#noBtn.moved{position:fixed;transition:left .25s ease,top .25s ease}
+input,select{background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:12px 14px;width:100%;outline:0}
+input:focus,select:focus,.btn:focus-visible,#noBtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.times{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.err{min-height:1.5em;color:var(--err);font-weight:700;margin:12px 0 4px;font-size:.95rem}
+.field{margin-bottom:6px}
+.dots{display:flex;gap:6px;justify-content:center;margin-bottom:8px}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--rose)}
+.msg{font-family:Fraunces,Georgia,serif;font-size:1.2rem;color:var(--ink);line-height:1.5}
+.fx{position:fixed;top:-40px;font-size:1.6rem;pointer-events:none;animation:fall linear forwards;z-index:100}
+@keyframes fall{to{transform:translateY(112vh) rotate(360deg);opacity:.9}}
+@media (prefers-reduced-motion:reduce){.step.active{animation:none}.fx{display:none}#noBtn.moved{transition:none}}
 </style>
 </head>
 <body>
-<div id="app">
-  <main class="card">
-    <div class="progress"><i id="progress"></i></div>
+<main>
+  <div class="dots" id="dots" aria-hidden="true"></div>
 
-    <section class="step active" data-step="1">
-      <div class="emoji">☕❤️</div>
-      <h1>Would you like to have chai with me?</h1>
-      <p>Just a simple cup of chai and good company. 🥹</p>
-      <div class="actions">
-        <button class="primary" id="yesBtn">Yes ❤️</button>
-        <button class="secondary" id="noBtn">No 😌</button>
-      </div>
-    </section>
+  <section class="step" id="s1">
+    <span class="cup">☕</span>
+    <h1>Will you have chai with me?</h1>
+    <p>Just one cup. Maybe two.</p>
+    <div class="row" id="yesNoRow">
+      <button class="btn big" id="yesBtn">YES ❤️</button>
+      <button class="btn big" id="noBtn" type="button">NO</button>
+    </div>
+  </section>
 
-    <section class="step" data-step="2">
-      <div class="emoji">📅☕</div>
-      <h2>Choose a day</h2>
-      <p>Which day should we meet for chai?</p>
-      <div class="field-wrap">
-        <label for="dateInput">Date</label>
-        <input id="dateInput" type="date">
-        <div class="error" id="dateError"></div>
-      </div>
-      <div class="nav">
-        <button class="back" id="dateBack">← Back</button>
-        <button class="primary" id="dateContinue" disabled>Continue →</button>
-      </div>
-    </section>
+  <section class="step" id="s2">
+    <h1>Which day works?</h1>
+    <p>Pick a day for our chai.</p>
+    <div class="field"><input type="date" id="date" aria-label="Day"></div>
+    <div class="err" id="e2" role="alert"></div>
+    <div class="row"><button class="btn ghost back-btn">Back</button><button class="btn" id="n2">Continue</button></div>
+  </section>
 
-    <section class="step" data-step="3">
-      <div class="emoji">⏰☕</div>
-      <h2>Choose a time</h2>
-      <p>What would be the perfect time for chai?</p>
-      <div class="field-wrap">
-        <label for="timeInput">Time</label>
-        <input id="timeInput" type="time">
-        <div class="error" id="timeError"></div>
-      </div>
-      <div class="nav">
-        <button class="back" id="timeBack">← Back</button>
-        <button class="primary" id="timeContinue" disabled>Continue →</button>
-      </div>
-    </section>
+  <section class="step" id="s3">
+    <h1>What time?</h1>
+    <p>Choose the hour, minute and AM or PM.</p>
+    <div class="times">
+      <select id="hh" aria-label="Hour"><option value="">Hour</option></select>
+      <select id="mm" aria-label="Minute"><option value="">Min</option></select>
+      <select id="ap" aria-label="AM or PM"><option value="">AM/PM</option><option>AM</option><option>PM</option></select>
+    </div>
+    <div class="err" id="e3" role="alert"></div>
+    <div class="row"><button class="btn ghost back-btn">Back</button><button class="btn" id="n3">Continue</button></div>
+  </section>
 
-    <section class="step" data-step="4">
-      <div class="emoji">📍☕</div>
-      <h2>Choose a location</h2>
-      <p>Tell me where we should meet, and the plan will be ready. ❤️</p>
-      <div class="field-wrap">
-        <label for="locationInput">Location</label>
-        <input id="locationInput" type="text" maxlength="120" placeholder="e.g. ABC Cafe">
-        <div class="error" id="locationError"></div>
-      </div>
-      <div class="nav">
-        <button class="back" id="locationBack">← Back</button>
-        <button class="primary" id="locationContinue" disabled>Continue →</button>
-      </div>
-    </section>
+  <section class="step" id="s4">
+    <h1>Where should we go?</h1>
+    <p>Name the cafe, dhaba or street corner.</p>
+    <div class="field"><input type="text" id="loc" maxlength="80" placeholder="e.g. ABC Cafe" autocomplete="off" aria-label="Location"></div>
+    <div class="err" id="e4" role="alert"></div>
+    <div class="row"><button class="btn ghost back-btn">Back</button><button class="btn" id="n4">Continue</button></div>
+  </section>
 
-    <section class="step" data-step="5">
-      <div class="emoji">🎉❤️</div>
-      <h2>Chai Meetup Confirmation</h2>
-      <div class="confirm-box" id="confirmationText"></div>
-      <div class="nav">
-        <button class="back" id="confirmBack">← Edit</button>
-        <button class="primary" id="confirmBtn">Yes, let's meet! ❤️☕</button>
-      </div>
-    </section>
-  </main>
-</div>
-
-<div id="celebration">
-  <div class="celebrate-content">
-    <div class="emoji">☕🎉❤️</div>
-    <h1>Perfect! ❤️☕</h1>
-    <p>It's officially a chai meetup!</p>
-    <p id="mailStatus" role="status" style="margin-top:14px;font-size:.95rem;opacity:.8"></p>
-    <button class="primary" id="mailRetry" type="button" hidden style="margin-top:10px">Try sending again</button>
-  </div>
-</div>
+  <section class="step" id="s5">
+    <span class="cup" id="fcup">🎉</span>
+    <p class="msg" id="final"></p>
+    <div class="row"><button class="btn ghost back-btn" id="b5">Back</button><button class="btn big" id="confirm">Yes, let's have chai! ❤️☕</button></div>
+    <h1 id="done" hidden>Perfect! ❤️☕ Chai is officially planned!</h1>
+    <p id="mailStatus" role="status" style="margin-top:14px;font-size:.95rem"></p>
+    <button class="btn" id="mailRetry" type="button" hidden>Try sending again</button>
+  </section>
+</main>
 
 <script>
-(() => {
-  const STORAGE_KEY = "chaiDateState";
-  const NOTIFY_EMAIL = "callmemrsheeqa@gmail.com";
-  const state = { response:null, selectedDate:"", selectedTime:"", location:"", emailSent:false };
+(function(){
+var KEY='chaiDateState', MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var NOTIFY_EMAIL='callmemrsheeqa@gmail.com';
+// Optional: paste a free Web3Forms access key so the email shows "Submitted Invitation" as the sender name. Leave empty to use FormSubmit.
+var WEB3FORMS_KEY='';
+var S={response:null,selectedDate:'',selectedTime:null,location:'',confirmed:false,emailSent:false,step:1};
+var $=function(id){return document.getElementById(id)};
+function load(){try{var r=sessionStorage.getItem(KEY);if(!r)return;var o=JSON.parse(r);if(!o||typeof o!=='object')return;
+  S.response=o.response==='Yes'?'Yes':null;
+  S.selectedDate=typeof o.selectedDate==='string'?o.selectedDate:'';
+  var t=o.selectedTime;S.selectedTime=t&&typeof t==='object'?{h:String(t.h||''),m:String(t.m||''),ap:String(t.ap||'')}:null;
+  S.location=typeof o.location==='string'?o.location:'';
+  S.confirmed=o.confirmed===true;}catch(e){}}
+function save(){}
 
-  const steps = [...document.querySelectorAll(".step")];
-  const progress = document.getElementById("progress");
-  const dateInput = document.getElementById("dateInput");
-  const timeInput = document.getElementById("timeInput");
-  const locationInput = document.getElementById("locationInput");
-  const dateContinue = document.getElementById("dateContinue");
-  const timeContinue = document.getElementById("timeContinue");
-  const locationContinue = document.getElementById("locationContinue");
-  const dateError = document.getElementById("dateError");
-  const timeError = document.getElementById("timeError");
-  const locationError = document.getElementById("locationError");
+function todayStr(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function validDate(v){if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;var p=v.split('-').map(Number),d=new Date(p[0],p[1]-1,p[2]);
+  return d.getFullYear()===p[0]&&d.getMonth()===p[1]-1&&d.getDate()===p[2]&&v>=todayStr()}
+function validTime(t){return !!t&&/^(0?[1-9]|1[0-2])$/.test(t.h)&&/^(00|15|30|45|[0-5]\d)$/.test(t.m)&&(t.ap==='AM'||t.ap==='PM')}
+function validLoc(l){var s=(l||'').trim();return s.length>=3&&/[\p{L}\p{N}]{2,}/u.test(s)}
+function fmtDate(v){var p=v.split('-').map(Number);return p[2]+' '+MONTHS[p[1]-1]+' '+p[0]}
+function fmtTime(t){return parseInt(t.h,10)+':'+t.m+' '+t.ap}
 
-  function save() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        response: state.response,
-        selectedDate: state.selectedDate,
-        selectedTime: state.selectedTime,
-        location: state.location,
-        emailSent: state.emailSent
-      }));
-    } catch (_) {}
-  }
+function firstIncomplete(){
+  if(S.response!=='Yes')return 1;
+  if(!validDate(S.selectedDate))return 2;
+  if(!validTime(S.selectedTime))return 3;
+  if(!validLoc(S.location))return 4;
+  return 5;}
 
-  function load() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const saved = JSON.parse(raw);
-      if (!saved || typeof saved !== "object") return;
-      state.response = saved.response === "Yes" ? "Yes" : null;
-      state.selectedDate = typeof saved.selectedDate === "string" ? saved.selectedDate : "";
-      state.selectedTime = typeof saved.selectedTime === "string" ? saved.selectedTime : "";
-      state.location = typeof saved.location === "string" ? saved.location : "";
-      state.emailSent = saved.emailSent === true;
-    } catch (_) {}
-  }
+function go(n,back){
+  var max=firstIncomplete(); if(n>max)n=max;
+  S.step=n;
+  document.querySelectorAll('.step').forEach(function(el){el.classList.remove('active','back')});
+  var el=$('s'+n); el.classList.add('active'); if(back)el.classList.add('back');
+  document.querySelectorAll('#dots i').forEach(function(d,i){d.classList.toggle('on',i<n)});
+  if(n===5)renderFinal();
+  if(n===1)placeNo(false);
+  var f=el.querySelector('input,select,#yesBtn'); if(f&&n!==1)setTimeout(function(){try{f.focus({preventScroll:true})}catch(e){}},60);
+  save();}
 
-  function todayISO() {
-    const d = new Date();
-    const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
-    return local.toISOString().slice(0,10);
-  }
+function renderFinal(){
+  $('final').textContent='Congratulations! 🎉❤️ You have planned our chai for '+fmtDate(S.selectedDate)+' at '+fmtTime(S.selectedTime)+' at '+S.location.trim()+'. Shall we meet at this time? ☕';
+  var c=S.confirmed;
+  $('done').hidden=!c; $('final').hidden=c; $('confirm').hidden=c; $('b5').hidden=c;
+  $('fcup').textContent=c?'☕❤️':'🎉';}
 
-  function validDate(value) {
-    if (!value) return false;
-    const d = new Date(value + "T00:00:00");
-    return !Number.isNaN(d.getTime()) && value >= todayISO();
-  }
+/* Step 1 */
+var no=$('noBtn');
+function placeNo(){
+  var w=no.offsetWidth||90,h=no.offsetHeight||50,pad=10,vw=window.innerWidth,vh=window.innerHeight;
+  var yes=$('yesBtn').getBoundingClientRect(),x,y,tries=0;
+  do{x=pad+Math.random()*Math.max(0,vw-w-2*pad);y=pad+Math.random()*Math.max(0,vh-h-2*pad);tries++;}
+  while(tries<30&&x<yes.right+12&&x+w>yes.left-12&&y<yes.bottom+12&&y+h>yes.top-12);
+  no.classList.add('moved');no.style.left=x+'px';no.style.top=y+'px';}
+function dodge(e){e.preventDefault();e.stopPropagation();placeNo();}
+['pointerenter','pointerdown','touchstart','click','focus'].forEach(function(ev){no.addEventListener(ev,dodge,{passive:false})});
+no.addEventListener('keydown',function(e){e.preventDefault();placeNo()});
+window.addEventListener('resize',function(){if(no.classList.contains('moved')){var r=no.getBoundingClientRect();
+  no.style.left=Math.max(10,Math.min(r.left,window.innerWidth-r.width-10))+'px';no.style.top=Math.max(10,Math.min(r.top,window.innerHeight-r.height-10))+'px';}});
+$('yesBtn').addEventListener('click',function(){S.response='Yes';no.classList.remove('moved');no.style.left=no.style.top='';go(2)});
 
-  function validTime(value) {
-    return /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
-  }
+/* Step 2 */
+var di=$('date');di.min=todayStr();
+function chk2(){var ok=validDate(di.value);$('n2').disabled=!ok;if(ok)$('e2').textContent='';return ok}
+di.addEventListener('input',function(){S.selectedDate=validDate(di.value)?di.value:'';chk2();save()});
+$('n2').addEventListener('click',function(){
+  if(!validDate(di.value)){$('e2').textContent=di.value?'Please choose today or a later day ☕❤️':'Please choose a day for our chai ☕❤️';return}
+  S.selectedDate=di.value;go(3)});
 
-  function validLocation(value) {
-    return value.trim().length >= 2;
-  }
+/* Step 3 */
+for(var i=1;i<=12;i++){var o=document.createElement('option');o.value=o.textContent=i;$('hh').appendChild(o)}
+['00','15','30','45'].forEach(function(m){var o=document.createElement('option');o.value=o.textContent=m;$('mm').appendChild(o)});
+function readT(){return{h:$('hh').value,m:$('mm').value,ap:$('ap').value}}
+function chk3(){var ok=validTime(readT());$('n3').disabled=!ok;if(ok)$('e3').textContent='';return ok}
+['hh','mm','ap'].forEach(function(id){$(id).addEventListener('change',function(){var t=readT();S.selectedTime=t;chk3();save()})});
+$('n3').addEventListener('click',function(){var t=readT();
+  if(!validTime(t)){$('e3').textContent='Ab time bhi select karo ☕⏰';return}
+  S.selectedTime=t;go(4)});
 
-  function refreshValidation() {
-    const dv = validDate(dateInput.value);
-    const tv = validTime(timeInput.value);
-    const lv = validLocation(locationInput.value);
-    dateContinue.disabled = !dv;
-    timeContinue.disabled = !tv;
-    locationContinue.disabled = !lv;
-    dateError.textContent = dateInput.value && !dv ? "Please choose today or a future day ☕❤️" : "";
-    timeError.textContent = timeInput.value && !tv ? "Please choose a valid time." : "";
-    locationError.textContent = locationInput.value && !lv ? "Please enter at least 2 meaningful characters." : "";
-  }
+/* Step 4 */
+var li=$('loc');
+li.addEventListener('input',function(){if(validLoc(li.value))$('e4').textContent='';S.location=li.value;save()});
+function submit4(){var v=li.value.trim().replace(/\s+/g,' ');
+  if(!validLoc(v)){$('e4').textContent='Chai kahan peeni hai? Location batao 📍☕';return}
+  li.value=v;S.location=v;go(5)}
+$('n4').addEventListener('click',submit4);
+li.addEventListener('keydown',function(e){if(e.key==='Enter')submit4()});
 
-  function goTo(stepNumber) {
-    const target = Math.min(5, Math.max(1, stepNumber));
-    steps.forEach(s => s.classList.toggle("active", Number(s.dataset.step) === target));
-    progress.style.width = (target * 20) + "%";
-    window.scrollTo({top:0, behavior:"smooth"});
-    if (target === 5) renderConfirmation();
-  }
+/* Back */
+document.querySelectorAll('.back-btn').forEach(function(b){b.addEventListener('click',function(){go(Math.max(1,S.step-1),true)})});
+document.querySelectorAll('#s2 .back-btn').forEach(function(b){b.onclick=function(){go(1,true)}});
 
-  function firstIncompleteStep() {
-    if (state.response !== "Yes") return 1;
-    if (!validDate(state.selectedDate)) return 2;
-    if (!validTime(state.selectedTime)) return 3;
-    if (!validLocation(state.location)) return 4;
-    return 5;
-  }
+/* Email notification */
+var mailStatus=$('mailStatus'),mailRetry=$('mailRetry'),sending=false;
+async function sendConfirmationEmail(){
+  if(S.emailSent||sending)return;
+  sending=true;mailRetry.hidden=true;mailStatus.textContent='Sending your confirmation… ☕';
+  try{
+    var details={response:'Yes',day:fmtDate(S.selectedDate),time:fmtTime(S.selectedTime),location:S.location.trim(),confirmed_at:new Date().toLocaleString('en-GB')};
+    var useW3F=WEB3FORMS_KEY.trim()!=='';
+    var url=useW3F?'https://api.web3forms.com/submit':'https://formsubmit.co/ajax/'+NOTIFY_EMAIL;
+    var payload=useW3F
+      ?Object.assign({access_key:WEB3FORMS_KEY.trim(),subject:'Submitted invitation',from_name:'Submitted Invitation'},details)
+      :Object.assign({_subject:'Submitted invitation',_template:'table',_captcha:'false'},details);
+    var res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+    var data=await res.json().catch(function(){return{}});
+    if(!res.ok||String(data.success)==='false')throw new Error(data.message||('HTTP '+res.status));
+    S.emailSent=true;mailStatus.textContent='Your confirmation has been sent ✅';
+  }catch(err){
+    console.error('Email send failed:',err);
+    var why;
+    if(location.protocol==='file:')why='This page was opened as a local file. Open it from its website address instead.';
+    else if(err instanceof TypeError)why='The email service could not be reached. Check your connection or turn off ad blockers.';
+    else why='The email service replied: '+err.message;
+    mailStatus.textContent="Couldn't send the confirmation. "+why;mailRetry.hidden=false;
+  }finally{sending=false}
+}
+mailRetry.addEventListener('click',sendConfirmationEmail);
 
-  function formatDate(value) {
-    const d = new Date(value + "T00:00:00");
-    return new Intl.DateTimeFormat("en-GB", {day:"numeric", month:"long", year:"numeric"}).format(d);
-  }
+/* Step 5 */
+$('confirm').addEventListener('click',function(){
+  var b=$('confirm');if(b.disabled)return;b.disabled=true;
+  if(firstIncomplete()!==5){go(firstIncomplete());b.disabled=false;return}
+  S.confirmed=true;renderFinal();celebrate();sendConfirmationEmail();
+  setTimeout(function(){b.disabled=false},1200)});
+function celebrate(){
+  var set=['❤️','☕','🎉','💖','🫖'];
+  for(var i=0;i<45;i++){(function(i){setTimeout(function(){
+    var s=document.createElement('span');s.className='fx';s.textContent=set[i%set.length];
+    s.style.left=Math.random()*100+'vw';s.style.animationDuration=(2.2+Math.random()*2)+'s';
+    document.body.appendChild(s);setTimeout(function(){s.remove()},4600)},i*50)})(i)}}
 
-  function formatTime(value) {
-    const [h,m] = value.split(":").map(Number);
-    const suffix = h >= 12 ? "PM" : "AM";
-    const hour = h % 12 || 12;
-    return hour + ":" + String(m).padStart(2,"0") + " " + suffix;
-  }
-
-  function renderConfirmation() {
-    document.getElementById("confirmationText").innerHTML =
-      "Great! 🎉❤️ You have planned a chai meetup for " +
-      "<strong>" + escapeHtml(formatDate(state.selectedDate)) + "</strong> at " +
-      "<strong>" + escapeHtml(formatTime(state.selectedTime)) + "</strong> at " +
-      "<strong>" + escapeHtml(state.location.trim()) + "</strong>. Shall we meet there at this time? ☕";
-  }
-
-  function escapeHtml(value) {
-    return value.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-
-  function restoreInputs() {
-    dateInput.min = todayISO();
-    dateInput.value = validDate(state.selectedDate) ? state.selectedDate : "";
-    timeInput.value = validTime(state.selectedTime) ? state.selectedTime : "";
-    locationInput.value = state.location;
-    refreshValidation();
-  }
-
-  document.getElementById("yesBtn").addEventListener("click", () => {
-    state.response = "Yes";
-    save();
-    goTo(2);
-  });
-
-  const noBtn = document.getElementById("noBtn");
-  function moveNo() {
-    const margin = 12;
-    const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - margin * 2);
-    const maxY = Math.max(0, window.innerHeight - noBtn.offsetHeight - margin * 2);
-    noBtn.style.position = "fixed";
-    noBtn.style.left = (margin + Math.random() * maxX) + "px";
-    noBtn.style.top = (margin + Math.random() * maxY) + "px";
-  }
-  ["pointerenter","pointerdown","touchstart","click"].forEach(eventName => {
-    noBtn.addEventListener(eventName, event => {
-      event.preventDefault();
-      event.stopPropagation();
-      moveNo();
-    }, {passive:false});
-  });
-
-  dateInput.addEventListener("input", refreshValidation);
-  timeInput.addEventListener("input", refreshValidation);
-  locationInput.addEventListener("input", refreshValidation);
-
-  dateContinue.addEventListener("click", () => {
-    if (!validDate(dateInput.value)) return refreshValidation();
-    state.selectedDate = dateInput.value;
-    save();
-    goTo(3);
-  });
-
-  timeContinue.addEventListener("click", () => {
-    if (!validTime(timeInput.value)) return refreshValidation();
-    state.selectedTime = timeInput.value;
-    save();
-    goTo(4);
-  });
-
-  locationContinue.addEventListener("click", () => {
-    const value = locationInput.value.trim();
-    if (!validLocation(value)) return refreshValidation();
-    state.location = value;
-    locationInput.value = value;
-    save();
-    goTo(5);
-  });
-
-  document.getElementById("dateBack").addEventListener("click", () => goTo(1));
-  document.getElementById("timeBack").addEventListener("click", () => goTo(2));
-  document.getElementById("locationBack").addEventListener("click", () => goTo(3));
-  document.getElementById("confirmBack").addEventListener("click", () => {
-    if (!validDate(state.selectedDate)) return goTo(2);
-    if (!validTime(state.selectedTime)) return goTo(3);
-    if (!validLocation(state.location)) return goTo(4);
-    goTo(4);
-  });
-
-  const mailStatus = document.getElementById("mailStatus");
-  const mailRetry = document.getElementById("mailRetry");
-  let sending = false;
-
-  async function sendConfirmationEmail() {
-    if (state.emailSent || sending) return;
-    sending = true;
-    mailRetry.hidden = true;
-    mailStatus.textContent = "Sending your confirmation… ☕";
-    try {
-      const res = await fetch("https://formsubmit.co/ajax/" + NOTIFY_EMAIL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({
-          _subject: "☕ Chai meetup confirmed!",
-          _template: "table",
-          _captcha: "false",
-          response: "Yes",
-          day: formatDate(state.selectedDate),
-          time: formatTime(state.selectedTime),
-          location: state.location.trim(),
-          confirmed_at: new Date().toLocaleString("en-GB")
-        })
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || String(data.success) === "false") throw new Error(data.message || ("HTTP " + res.status));
-      state.emailSent = true;
-      save();
-      mailStatus.textContent = "Your confirmation has been sent ✅";
-    } catch (err) {
-      console.error("Email send failed:", err);
-      let why;
-      if (location.protocol === "file:") why = "This page was opened as a local file. Open it from its website address instead.";
-      else if (err instanceof TypeError) why = "The email service could not be reached. Check your connection or turn off ad blockers.";
-      else why = "The email service replied: " + err.message;
-      mailStatus.textContent = "Couldn't send the confirmation. " + why;
-      mailRetry.hidden = false;
-    } finally {
-      sending = false;
-    }
-  }
-  mailRetry.addEventListener("click", sendConfirmationEmail);
-
-  document.getElementById("confirmBtn").addEventListener("click", function() {
-    if (state.response !== "Yes") return goTo(1);
-    if (!validDate(state.selectedDate)) return goTo(2);
-    if (!validTime(state.selectedTime)) return goTo(3);
-    if (!validLocation(state.location)) return goTo(4);
-    this.disabled = true;
-    document.getElementById("celebration").classList.add("show");
-    sendConfirmationEmail();
-    for (let i=0;i<28;i++) {
-      const heart = document.createElement("span");
-      heart.className = "heart";
-      heart.textContent = Math.random() > .35 ? "❤️" : "☕";
-      heart.style.left = Math.random()*100 + "vw";
-      heart.style.animationDelay = Math.random()*1.4 + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setTimeout(() => { this.disabled = false; }, 1800);
-  });
-
-  load();
-  restoreInputs();
-  goTo(firstIncompleteStep());
+/* Init */
+var dots=$('dots');for(var k=0;k<5;k++)dots.appendChild(document.createElement('i'));
+/* Always start from the first page: discard any old saved progress on every open or refresh. */
+try{sessionStorage.removeItem(KEY);localStorage.removeItem(KEY)}catch(e){}
+chk2();chk3();
+go(1);
+window.addEventListener('pageshow',function(e){if(e.persisted)location.reload()});
 })();
 </script>
 </body>
